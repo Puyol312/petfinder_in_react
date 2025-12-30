@@ -1,0 +1,20 @@
+:root {
+  --header-height: 70px;
+  --footer-height: 56px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body{
+  padding-top: var(--header-height);
+  padding-bottom: var(--footer-height);
+  background-color: #DEF4F0;
+}
+.hidden {
+  display: none;
+}
