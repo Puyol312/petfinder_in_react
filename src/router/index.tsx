@@ -9,6 +9,7 @@ import { MainLayout as Layout } from "../components/layout";
 import { HomePage } from "../pages/home";
 import { HelpPage } from "../pages/help";
 import { ReportPage } from "../pages/Reportes";
+import { SignInPage } from "../pages/SignIn";
 
 function AppRouter() { 
   return (
@@ -18,6 +19,7 @@ function AppRouter() {
           <Route index element={<HomePage />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/reports" element={<ReportPage />} />
+          <Route path="/signin" element={<SignInPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

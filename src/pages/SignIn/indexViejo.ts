@@ -52,7 +52,7 @@
 //                 Recordarme
 //               </label>
 //             </div>
-//             <a href="/helppassword" class="text-primary small">¿Olvidaste tu contraseña?</a>
+//             <a href="/help" class="text-primary small">¿Olvidaste tu contraseña?</a>
 //           </div>
 
 //           <button type="submit" class="btn btn-primary w-100 py-2 mb-2">Ingresar</button>
@@ -157,8 +157,7 @@
 //     setTimeout(() => router.goTo("/reportarmascota"), 0);
 //     return container;
 //   }
-//   const header = getHeader();
-//   const footer = getFooter();
+
 //   const body = getBody();
 
 //   const singInPage = document.createElement('div');

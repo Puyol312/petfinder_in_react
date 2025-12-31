@@ -12,9 +12,23 @@ import { PetWanted } from "../types/pet";
 const localStorageImpl = createJSONStorage(() => localStorage);
 const sessionStorageImpl = createJSONStorage(() => sessionStorage);
 
+// Función para obtener el user inicial del storage
+const getInitialUser = (): User | null => {
+  try {
+    const localUser = localStorage.getItem('user');
+    if (localUser) return JSON.parse(localUser);
+    
+    const sessionUser = sessionStorage.getItem('user');
+    if (sessionUser) return JSON.parse(sessionUser);
+    
+    return null;
+  } catch {
+    return null;
+  }
+};
 
 // USER ATOMS
-const userAtom = atom<User | null>(null);
+const userAtom = atom<User | null>(getInitialUser());
 
 const myReportsAtom = atom<Promise<PetWanted[] | null>>(async (get) => {
   const user = get(userAtom);
@@ -33,17 +47,17 @@ const useUser = () => {
 
   const setUserPersisted = (nextUser: User | null) => {
     setUser(nextUser);
-
     if (!nextUser) {
       localStorage.removeItem('user');
       sessionStorage.removeItem('user');
       return;
     }
-
     if (nextUser.persist) {
       localStorage.setItem('user', JSON.stringify(nextUser));
+      sessionStorage.removeItem('user');
     } else {
       sessionStorage.setItem('user', JSON.stringify(nextUser));
+      localStorage.removeItem('user');
     }
   };
 
