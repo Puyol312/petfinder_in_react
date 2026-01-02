@@ -13,15 +13,6 @@ function MainLayout() {
   const handleLogOut = () => { 
     setUser(null);
   }
-  useEffect(() => {
-    const stored =
-      localStorage.getItem('user') ??
-      sessionStorage.getItem('user');
-
-    if (stored) {
-      setUser(JSON.parse(stored));
-    }
-  }, [setUser]);
 
   return (
     <>

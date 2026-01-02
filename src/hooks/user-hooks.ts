@@ -47,6 +47,7 @@ const useUser = () => {
 
   const setUserPersisted = (nextUser: User | null) => {
     setUser(nextUser);
+
     if (!nextUser) {
       localStorage.removeItem('user');
       sessionStorage.removeItem('user');

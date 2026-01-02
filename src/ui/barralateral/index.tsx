@@ -34,7 +34,7 @@ function NavLinks({ onLogOut, geo }: { onLogOut: () => void; geo: Geolocation | 
         {geo ? (
           <Link
             className="nav-link"
-            to={`/reportes?lat=${geo.lat}&lng=${geo.lng}`}
+            to={`/reports?lat=${geo.lat}&lng=${geo.lng}`}
           >
             Mascotas Reportadas
           </Link>

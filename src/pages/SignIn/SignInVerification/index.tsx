@@ -1,13 +1,17 @@
-import React ,{ JSX } from "react";
-import { Navigate } from "react-router-dom";
+import React ,{ JSX, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/user-hooks";
 
-export function SignInVerification ({ children }: { children: JSX.Element }) {
-  const [user,] = useUser();
+export function SignInVerification({ children }: { children: JSX.Element }) {
+  const [user] = useUser();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  if (user) {
-    return <Navigate to="/misreports" replace />;
-  }
+  useEffect(() => {
+    if (user && location.pathname !== '/help') {
+      navigate('/help', { replace: true });
+    }
+  }, [user, location.pathname, navigate]);
 
   return children;
 }

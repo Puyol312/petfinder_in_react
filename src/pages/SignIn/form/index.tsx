@@ -1,11 +1,11 @@
 import React, { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Form({ onSubmit }: { onSubmit: (email:string, password:string, remember:boolean) => Promise<void> }) {
   const [loginAlert, setLoginAlert] = useState({ alert: false, message: '' });
-  const navigate = useNavigate();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => { 
-    e.preventDefault();
+    e.preventDefault(); e.stopPropagation();
+    
     const form = e.currentTarget;
     const data = new FormData(form);
     const obj = Object.fromEntries(data.entries());
@@ -13,9 +13,9 @@ export function Form({ onSubmit }: { onSubmit: (email:string, password:string, r
     const email = String(obj.email);
     const password = String(obj.password);
     const remember = obj.remember === "true";
+    
     try {
       await onSubmit(email, password, remember);
-      navigate('/help');
     } catch (error) {
       setLoginAlert({
         alert: true,
