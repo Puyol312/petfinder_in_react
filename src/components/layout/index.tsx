@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { useUser } from "../../hooks/user-hooks";
 import { useGeo } from "../../hooks/geo-hooks";
@@ -10,6 +10,7 @@ import { MainFooter as Footer } from "../footer";
 function MainLayout() {
   const [user, setUser] = useUser();
   const [geo,] = useGeo();
+  const navigate = useNavigate
   const handleLogOut = () => { 
     setUser(null);
   }

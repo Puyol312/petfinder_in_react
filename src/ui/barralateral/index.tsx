@@ -4,30 +4,15 @@ import { Link } from "react-router-dom";
 import { User } from "../../types/user";
 import { Geolocation } from "../../types/geo";
 
+import { UserDropdownV3 as UserDropdown } from "./UserDropdown";
+
 type SideBarProps = {
   user: User | null;
   geo: Geolocation | null;
   handleLogOut: () => void;
 }
-
-// LINKS DEL USUARIO
-function UserDropdown({ onLogOut }: { onLogOut: () => void }) {
-  return (
-    <li className="nav-item dropdown">
-      <Link className="nav-link dropdown-toggle" to="/me" data-bs-toggle="dropdown">
-        Usuario
-      </Link>
-      <ul className="dropdown-menu">
-        <li><Link className="dropdown-item" to="/signin">Iniciar sesión</Link></li>
-        <li><Link className="dropdown-item" to="/signup">Registrarse</Link></li>
-        <li><hr className="dropdown-divider" /></li>
-        <li><Link className="dropdown-item" to="/home" onClick={onLogOut}>Cerrar sesión</Link></li>
-      </ul>
-    </li>
-  );
-}
 // LINKS A PAGINAS
-function NavLinks({ onLogOut, geo }: { onLogOut: () => void; geo: Geolocation | null}) {
+function NavLinks({ user, onLogOut, geo }: { user: User | null; onLogOut: () => void; geo: Geolocation | null}) {
   return (
     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
       <li className="nav-item">
@@ -47,14 +32,36 @@ function NavLinks({ onLogOut, geo }: { onLogOut: () => void; geo: Geolocation | 
           </span>
         )}
       </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/reportarmascota">Mis Mascotas Reportadas</Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/reportarnuevamascota">Reportar Nueva Mascota</Link>
-      </li>
+      
+      {user ? (
+        <>
+          <li className="nav-item">
+            <Link className="nav-link" to="/reportarmascota">
+              Mis Mascotas Reportadas
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/reportarnuevamascota">
+              Reportar Nueva Mascota
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className="nav-item">
+            <span className="nav-link disabled" style={{ cursor: 'not-allowed' }}>
+              Mis Mascotas Reportadas
+            </span>
+          </li>
+          <li className="nav-item">
+            <span className="nav-link disabled" style={{ cursor: 'not-allowed' }}>
+              Reportar Nueva Mascota
+            </span>
+          </li>
+        </>
+      )}
 
-      <UserDropdown onLogOut={onLogOut} />
+      <UserDropdown user={user} onLogOut={onLogOut} />
     </ul>
   );
 }
@@ -67,7 +74,7 @@ function UserInfo({ user }: { user: User | null }) {
   );
 }
 // BARRA LATERAL
-function sideBar({ user, geo, handleLogOut }: SideBarProps) {
+function NavbarOffcanvas({ user, geo, handleLogOut }: SideBarProps) {
   return (
     <div className="offcanvas offcanvas-end" id="offcanvasNavbar">
       <div className="offcanvas-header">
@@ -76,11 +83,11 @@ function sideBar({ user, geo, handleLogOut }: SideBarProps) {
       </div>
 
       <div className="offcanvas-body">
-        <NavLinks onLogOut={handleLogOut} geo={geo} />
+        <NavLinks user={user} onLogOut={handleLogOut} geo={geo} />
         <UserInfo user={user} />
       </div>
     </div>
   );
 }
 
-export { sideBar as NavbarOffcanvas }
+export { NavbarOffcanvas }
