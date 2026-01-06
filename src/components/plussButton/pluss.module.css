@@ -1,0 +1,10 @@
+.plusbutton {
+  bottom: 60px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
