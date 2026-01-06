@@ -8,7 +8,7 @@ import * as css from "./mascotas.module.css"
 
 import { useNearReports } from "../../hooks/geo-hooks";
 
-import { ReportsGuard } from "../../components/ReportsGuard";
+import { GeoGuard } from "../../components/GeoGuard";
 import { RowReports } from "../../components/rowReports";
 import { ContactModal } from "../../components/ReportModal";
 import { controladorMascotasOk as controladorMascotas } from "../../lib/api/mascotas-controller";
@@ -16,8 +16,8 @@ import { Spinner } from "../../components/spiner";
 
 export const ReportPage = () => {
   let [nearReports,] = useNearReports();
-  const [selectedCard, setSelectedCard] = useState<PetWanted | null>(null);
   if (!nearReports) nearReports = [];
+  const [selectedCard, setSelectedCard] = useState<PetWanted | null>(null);
 
   const handleOpenModal = (card:PetWanted) => {
     setSelectedCard(card);
@@ -45,13 +45,13 @@ export const ReportPage = () => {
       });
   }
   return (
-    <ReportsGuard>
+    <GeoGuard>
       <div className={css.mascotas}>
         <Suspense fallback={<Spinner /> }>
           <RowReports cards={nearReports} onClick={handleOpenModal} />
         </Suspense>
         <ContactModal card={selectedCard} onContact={handleOnContact} />
       </div>
-    </ReportsGuard>
+    </GeoGuard>
   );
 }

@@ -7,8 +7,6 @@ import { User } from "../types/user";
 import { controladorMascotasOk as controladorMascotas } from "../lib/api/mascotas-controller";
 import { PetWanted } from "../types/pet";
 
-
-
 const localStorageImpl = createJSONStorage(() => localStorage);
 const sessionStorageImpl = createJSONStorage(() => sessionStorage);
 

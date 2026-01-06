@@ -1,7 +1,7 @@
 import React, { JSX } from "react";
 import Swal from "sweetalert2";
 
-import { controladorUsuarioError as controladorUsuario } from '../../lib/api/users-controller';
+import { controladorUsuarioOk as controladorUsuario } from '../../lib/api/users-controller';
 import { useUser } from "../../hooks/user-hooks";
 
 import signInLogo from './login_primary.svg';

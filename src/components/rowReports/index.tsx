@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PetWantedCard } from "../../ui/cards";
+import { PetWantedCard, PetWantedCardV2 } from "../../ui/cards";
 
 import { PetWanted } from "../../types/pet";
 
@@ -21,4 +21,16 @@ const RowReports = ({ cards, onClick }: rowReportsPros) => {
     </div>
   );
 }
-export { RowReports }
+const RowReportsV2 = ({ cards, onClick }: rowReportsPros) => {
+  return (
+    <div className="row justify-content-center g-4" style={{margin:10}}>
+      {cards.length > 0
+        ? cards.map((r) => { 
+          return <PetWantedCardV2 key={r.id} card={r} onClick={onClick} />
+        })
+        : <p className='text-center'>No hay mascotas reportas por usted.</p>
+      }
+    </div>
+  );
+}
+export { RowReports, RowReportsV2 }

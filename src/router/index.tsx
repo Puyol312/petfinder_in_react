@@ -10,6 +10,9 @@ import { HomePage } from "../pages/home";
 import { HelpPage } from "../pages/help";
 import { ReportPage } from "../pages/Reportes";
 import { SignInPage } from "../pages/SignIn";
+import { MisReportesPage } from "../pages/MisReportes";
+import { NuevoReportePage } from "../pages/NuevoReporte"
+import { EditarReportePage } from "../pages/EditarReporte";
 
 function AppRouter() { 
   return (
@@ -20,6 +23,9 @@ function AppRouter() {
           <Route path="/help" element={<HelpPage />} />
           <Route path="/reports" element={<ReportPage />} />
           <Route path="/signin" element={<SignInPage />} />
+          <Route path="/misreportes" element={ <MisReportesPage/>}/>
+          <Route path="/reportarnuevamascota" element={<NuevoReportePage />} />
+          <Route path="/editarreporte" element={<EditarReportePage/>} /> 
         </Route>
       </Routes>
     </BrowserRouter>
