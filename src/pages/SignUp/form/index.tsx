@@ -44,7 +44,6 @@ export function LogupForm({ onSubmit }: LogupProps) {
 	}
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
-		console.log(value);
 		// Regex: mínimo 8 caracteres y al menos 1 símbolo
 		const passwordRegex = /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
 		setPassword({
@@ -82,8 +81,8 @@ export function LogupForm({ onSubmit }: LogupProps) {
 		}
 	}, [password, confirPassword])
   return (
-		<div className="col-12 col-md-5 col-lg-4">
-			<div className="p-4 p-md-5 bg-white shadow rounded">
+		<div className="col-12 col-md-6 col-lg-5">
+			<div className="p-4 p-md-5 bg-white shadow rounded mx-auto" style={{ maxWidth: 420 }}>
 				<h3 className="mb-4 text-center text-md-start fw-bold">Crear cuenta</h3>
 
 				{logupAlert.alert && (
@@ -112,9 +111,7 @@ export function LogupForm({ onSubmit }: LogupProps) {
 							<strong>Contraseña</strong>
 						</label>
 						{passwordAlert.alert && (
-							<div
-								id="login-error"
-								className="alert alert-danger py-2 text-center">
+							<div className="alert alert-danger py-1 small text-center mt-2">
 								{passwordAlert.message}
 							</div>
 						)}
@@ -133,9 +130,7 @@ export function LogupForm({ onSubmit }: LogupProps) {
 							<strong>Confirmar contraseña</strong>
 						</label>
 						{confirPasswordAlert.alert && (
-							<div
-								id="login-error"
-								className="alert alert-danger py-2 text-center">
+							<div className="alert alert-danger py-1 small text-center mt-2">
 								{confirPasswordAlert.message}
 							</div>
 						)}
