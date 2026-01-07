@@ -25,8 +25,8 @@ export function Form({ onSubmit }: { onSubmit: (email:string, password:string, r
     form.reset();
   }
   return (
-    <div className="col-12 col-md-5 col-lg-4">
-      <div className="p-4 p-md-5 bg-white shadow rounded">
+    <div className="col-12 col-md-6 col-lg-5">
+      <div className="p-4 p-md-5 bg-white shadow rounded mx-auto" style={{ maxWidth: 420 }}>
         
         <h3 className="mb-4 text-center text-md-start fw-bold">Iniciar sesión</h3>
 

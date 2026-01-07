@@ -2,15 +2,17 @@ import React, { JSX } from "react";
 import Swal from "sweetalert2";
 
 import { controladorUsuarioOk as controladorUsuario } from '../../lib/api/users-controller';
+
 import { useUser } from "../../hooks/user-hooks";
+import { useNavigate } from "react-router-dom";
 
 import signInLogo from './login_primary.svg';
 import * as css from './signin.module.css';
 
-import { SignInVerification } from "../../components/SignInVerification";
+import { SignInVerification } from "../../components/Sign/SignInVerification";
 import { Form } from "./form";
-import { useNavigate } from "react-router-dom";
-
+import { ImgComponent } from "../../components/Sign/imagenSign";
+import { SignContainer } from "../../components/Sign/SignContainer";
 
 function SignInContainer({ children }: {children: JSX.Element}) {
   return (
@@ -20,17 +22,6 @@ function SignInContainer({ children }: {children: JSX.Element}) {
       </div>
     </div>
   );
-}
-function SignInImage() {
-  return (  
-    <div className="col-12 col-md-6 d-flex justify-content-center mb-4 mb-md-0">
-      <img 
-        src={signInLogo}
-        alt="Login Illustration"
-        className="img-fluid"
-        style={{ maxWidth: 330}}
-      />
-    </div>)
 }
 
 export function SignInPage() {
@@ -46,12 +37,12 @@ export function SignInPage() {
   };
   return (
     <SignInVerification>
-      <SignInContainer>
+      <SignContainer>
         <>
-          <SignInImage />
+          <ImgComponent image={signInLogo} />
           <Form onSubmit={handleSubmit}/>
         </>
-      </SignInContainer>
+      </SignContainer>
     </SignInVerification>
   );
 }
