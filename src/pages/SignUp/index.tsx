@@ -31,7 +31,8 @@ function SignUpContainer({ children }: {children: JSX.Element}) {
 
 export function SignUpPage() {
   const handleSubmit = (data:LogupData) => {
-    console.log(data);
+    if(data.password !== data.confirmPassword) throw new Error("Por favor cheque que las contraseñas sean iguales");
+    
   }
   return (
     <SignInVerification>
