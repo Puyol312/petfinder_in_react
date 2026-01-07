@@ -1,17 +1,4 @@
-import React from "react"
+import { MainButton as MainButtonV1, SecondaryButton as SecondaryButtonV1 } from "./v1";
+import { MainButton as MainButtonV2, SecondaryButton as SecondaryButtonV2 } from "./v2";
 
-type ButtonsProps = {
-  children: any;
-  type: "submit" | "reset" | "button" | undefined;
-  onClick: () => void
-}
-
-const MainButton = ({ children, type, onClick }:ButtonsProps) => { 
-  return <button onClick={onClick} id="location" type={type} className="btn btn-primary">{children}</button>
-}
-
-const SecondaryButton = ({ children, type, onClick }: ButtonsProps) => {
-  return <button onClick={onClick} type={ type } className="btn btn-success">{ children }</button>
-}
-
-export { MainButton, SecondaryButton }
+export { MainButtonV1 as MainButton, SecondaryButtonV1 as SecondaryButton }
