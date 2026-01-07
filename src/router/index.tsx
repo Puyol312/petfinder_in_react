@@ -13,6 +13,7 @@ import { SignInPage } from "../pages/SignIn";
 import { MisReportesPage } from "../pages/MisReportes";
 import { NuevoReportePage } from "../pages/NuevoReporte"
 import { EditarReportePage } from "../pages/EditarReporte";
+import { SignUpPage } from "../pages/SignUp";
 
 function AppRouter() { 
   return (
@@ -23,6 +24,7 @@ function AppRouter() {
           <Route path="/help" element={<HelpPage />} />
           <Route path="/reports" element={<ReportPage />} />
           <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/misreportes" element={ <MisReportesPage/>}/>
           <Route path="/reportarnuevamascota" element={<NuevoReportePage />} />
           <Route path="/editarreporte" element={<EditarReportePage/>} /> 
