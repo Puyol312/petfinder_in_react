@@ -1,6 +1,6 @@
 import React ,{ JSX, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useUser } from "../../../hooks/user-hooks";
+import { useUser } from "../../hooks/user-hooks";
 
 export function SignInVerification({ children }: { children: JSX.Element }) {
   const [user,] = useUser();

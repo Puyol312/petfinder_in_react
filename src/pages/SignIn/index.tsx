@@ -7,7 +7,7 @@ import { useUser } from "../../hooks/user-hooks";
 import signInLogo from './login_primary.svg';
 import * as css from './signin.module.css';
 
-import { SignInVerification } from "./SignInVerification";
+import { SignInVerification } from "../../components/SignInVerification";
 import { Form } from "./form";
 import { useNavigate } from "react-router-dom";
 
