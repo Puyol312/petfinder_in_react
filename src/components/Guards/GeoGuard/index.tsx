@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 import { useSearchParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import { useGeo } from "../../hooks/geo-hooks";
+import { useGeo } from "../../../hooks/geo-hooks";
 
 export const GeoGuard = ({ children }: { children: JSX.Element }) => {
   const [sp] = useSearchParams();
