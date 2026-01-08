@@ -1,8 +1,9 @@
 import React,{ useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { User } from '../../../../../../types/user';
-import { Geolocation } from '../../../../../../types/geo';
+import { User } from '../../../../../types/user';
+import { Geolocation } from '../../../../../types/geo';
+
 import { Offcanvas } from 'bootstrap';
 
 function UserDropdown({ user, onLogOut }: { user: any; onLogOut: () => void }) {
@@ -158,7 +159,7 @@ function UserDropdownV2({ user, onLogOut }: { user: any; onLogOut: () => void })
     </li>
   );
 }
-function UserDropdownV3({ user, onLogOut }: { user: any; onLogOut: () => void }) {
+function UserDropdownV3({ user, onLogOut }: { user: User | null; onLogOut: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
@@ -183,23 +184,37 @@ function UserDropdownV3({ user, onLogOut }: { user: any; onLogOut: () => void })
         aria-expanded={isOpen}
         type="button"
       >
-        {user ? user.name || 'Usuario' : 'Usuario'}
+        {user ? user?.email?.split("@")[0] || 'Usuario' : 'Usuario'}
       </button>
 
       <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
         {user ? (
-          <li>
-            <Link 
-              className="dropdown-item" 
-              to="/" 
-              onClick={(e) => {
-                setIsOpen(false);
-                onLogOut();
-              }}
-            >
-              Cerrar sesión
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link 
+                className="dropdown-item" 
+                to="/config" 
+                onClick={(e) => {
+                  setIsOpen(false);
+                }}
+              >
+                Configuracion
+              </Link>
+            </li>
+            <li><hr className="dropdown-divider" /></li>
+            <li>
+              <Link 
+                className="dropdown-item" 
+                to="/" 
+                onClick={(e) => {
+                  setIsOpen(false);
+                  onLogOut();
+                }}
+              >
+                Cerrar sesión
+              </Link>
+            </li>
+          </>
         ) : (
           <>
             <li>
