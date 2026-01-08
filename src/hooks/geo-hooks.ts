@@ -4,17 +4,44 @@ import { atom, useAtom } from "jotai";
 import { Geolocation } from "../types/geo";
 import { PetWanted } from "../types/pet";
 
-import { controladorMascotasOk as controladorMascotas } from "../lib/api/mascotas-controller";
+import { getControladorMascotas } from "../lib/Mascotas_Controler";
 import { useSearchParams } from "react-router-dom";
 
+
+const getInitialGeo = (): Geolocation | null => {
+  try {
+    const sessionGeo = sessionStorage.getItem('geo');
+    if (sessionGeo) return JSON.parse(sessionGeo);
+    
+    return null;
+  } catch {
+    return null;
+  }
+};
 // GEO ATOMS
-const geoAtom = atom<Geolocation | null>(null);
+const geoAtom = atom<Geolocation | null>(getInitialGeo());
+
+const geoAtomWithPersistence = atom(
+  (get) => get(geoAtom),
+  (get, set, newValue: Geolocation | null) => {
+    set(geoAtom, newValue);
+    try {
+      if (newValue) {
+        sessionStorage.setItem('geo', JSON.stringify(newValue));
+      } else {
+        sessionStorage.removeItem('geo');
+      }
+    } catch (error) {
+      console.error('Error saving to sessionStorage:', error);
+    }
+  }
+);
 
 const nearReportsAtom = atom<Promise<PetWanted[] | null>>(async (get) => {
   const geo = get(geoAtom);
   if (!geo) return [];
   try {
-    return await controladorMascotas.getMascotasCerca(geo);
+    return await getControladorMascotas().getMascotasCerca(geo);
   } catch (e) { 
     console.error(e);
     return [];
@@ -22,7 +49,7 @@ const nearReportsAtom = atom<Promise<PetWanted[] | null>>(async (get) => {
 });
 
 const useGeo = () => {
-  return useAtom(geoAtom);
+  return useAtom(geoAtomWithPersistence);
 }
 
 const useNearReports = () => {

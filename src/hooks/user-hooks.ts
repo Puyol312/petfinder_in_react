@@ -4,7 +4,8 @@ import { atom, useAtom } from "jotai";
 import { createJSONStorage } from 'jotai/utils';
 
 import { User } from "../types/user";
-import { controladorMascotasOk as controladorMascotas } from "../lib/api/mascotas-controller";
+import { getControladorMascotas } from "../lib/Mascotas_Controler";
+
 import { PetWanted } from "../types/pet";
 
 const localStorageImpl = createJSONStorage(() => localStorage);
@@ -32,7 +33,7 @@ const myReportsAtom = atom<Promise<PetWanted[] | null>>(async (get) => {
   const user = get(userAtom);
   if (!user) return [];
   try {
-    return await controladorMascotas.getMisMascotasReportadas(user.token);
+    return await getControladorMascotas().getMisMascotasReportadas(user.token);
   } catch (e) {
     console.error(e);
     return [];
