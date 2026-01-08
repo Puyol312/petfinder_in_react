@@ -1,7 +1,7 @@
 import React, { JSX } from "react";
 import Swal from "sweetalert2";
 
-import { controladorUsuarioOk as controladorUsuario } from '../../lib/api/users-controller';
+import { getControladorUsuario } from '../../lib/User_Controler/users-controller';
 
 import { useUser } from "../../hooks/user-hooks";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { SignInVerification } from "../../components/Sign/SignInVerification";
 import { Form } from "./form";
 import { ImgComponent } from "../../components/Sign/imagenSign";
 import { SignContainer } from "../../components/Sign/SignContainer";
+
 
 function SignInContainer({ children }: {children: JSX.Element}) {
   return (
@@ -28,7 +29,7 @@ export function SignInPage() {
   const [, setUserPersisted] = useUser();
   const navigate = useNavigate();
   const handleSubmit = async (email: string, password: string, remember: boolean) => {
-    const token = await controladorUsuario.verificarUsuario(email, password);
+    const token = await getControladorUsuario().verificarUsuario(email, password);
     setUserPersisted({
       email,
       token,

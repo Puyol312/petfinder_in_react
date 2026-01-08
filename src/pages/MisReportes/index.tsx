@@ -7,7 +7,7 @@ import * as css from './misreportes.module.css'
 
 import { PetWanted } from "../../types/pet";
 
-import { SignInGuard } from "../../components/SignInGuard";
+import { SignInGuard } from "../../components/Guards/SignInGuard";
 import { RowReportsV2 } from "../../components/rowReports";
 import { Spinner } from "../../components/spiner";
 import { PlussButton } from "../../components/PlussButton";

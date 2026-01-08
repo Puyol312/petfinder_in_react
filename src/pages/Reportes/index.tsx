@@ -4,14 +4,15 @@ import Swal from "sweetalert2";
 import { Geolocation } from "../../types/geo";
 import { PetWanted } from "../../types/pet";
 
+import { getControladorMascotas } from "../../lib/Mascotas_Controler";
+
 import * as css from "./mascotas.module.css"
 
 import { useNearReports } from "../../hooks/geo-hooks";
 
-import { GeoGuard } from "../../components/GeoGuard";
+import { GeoGuard } from "../../components/Guards/GeoGuard";
 import { RowReports } from "../../components/rowReports";
 import { ContactModal } from "../../components/ReportModal";
-import { controladorMascotasOk as controladorMascotas } from "../../lib/api/mascotas-controller";
 import { Spinner } from "../../components/spiner";
 
 export const ReportPage = () => {
@@ -24,7 +25,7 @@ export const ReportPage = () => {
   };
 
   function handleOnContact({ id, name, message, phone }: {id:number, name:string, message:string, phone:string}) { 
-    controladorMascotas.enviarReporteMascota(name, phone, message, id)
+    getControladorMascotas().enviarReporteMascota(name, phone, message, id)
       .then(respuesta => {
         Swal.fire({
           icon: 'success',

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 
-import { controladorMascotasOk as controladorMascotas } from "../../lib/api/mascotas-controller";
+import { getControladorMascotas } from "../../lib/Mascotas_Controler";
 
 import { Geolocation } from "../../types/geo";
 import { DtReporte } from "../../types/pet";
@@ -11,13 +11,14 @@ import { useGeo } from "../../hooks/geo-hooks";
 import { useUser } from "../../hooks/user-hooks";
 import { useNavigate } from "react-router-dom";
 
-import { SignInGuard } from "../../components/SignInGuard";
-import { GeoGuard } from "../../components/GeoGuard";
+import { SignInGuard } from "../../components/Guards/SignInGuard";
+import { GeoGuard } from "../../components/Guards/GeoGuard";
 import { MapForm } from "../../components/MapForm";
+
 
 async function enviarReporteMascota(token: string, newReport: DtReporte) {
   try {
-    const res = controladorMascotas.altaReporteMascota(token, newReport);
+    const res = getControladorMascotas().altaReporteMascota(token, newReport);
     const { message } = await res;
     Swal.fire({
       icon: 'success',
@@ -37,7 +38,6 @@ async function enviarReporteMascota(token: string, newReport: DtReporte) {
     });
   }
 }
-
 export function NuevoReportePage() {
   const [user,] = useUser();
   const [geo] = useGeo();
@@ -57,7 +57,26 @@ export function NuevoReportePage() {
       country: data.pais,
       img: data.imagen
     };
-    await enviarReporteMascota(token, reporte);
+    try {
+      const res = await enviarReporteMascota(token, reporte);
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reporte enviado!',
+        text: 'El reporte fue recibido correctamente',
+        timer: 2000,
+        showConfirmButton: false
+      });
+      navigate('/misreportes')
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No se pudo enviar el reporte. Intente nuevamente',
+        timer: 3000,
+        showConfirmButton: false
+      });
+    }
   };
   return (
     <SignInGuard>

@@ -25,7 +25,7 @@ export function MapForm({ ubicacion, token, onSubmit, onReset, inyec }: Reportar
   const mapRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -53,15 +53,19 @@ export function MapForm({ ubicacion, token, onSubmit, onReset, inyec }: Reportar
     }
     const ubicacion = formData.get("ubicacion")?.toString() ?? "";
     const [latitud, longitud] = ubicacion.split(",").map(Number)
-    onSubmit({
-      nombre: formData.get("nombre") as string,
-      imagen: file,
-      ciudad: formData.get("ciudad") as string,
-      pais: formData.get("pais") as string,
-      ubicacion: {lat:latitud, lng:longitud},
-      token,
-    });
-    form.reset();
+    try {
+      await onSubmit({
+        nombre: formData.get("nombre") as string,
+        imagen: file,
+        ciudad: formData.get("ciudad") as string,
+        pais: formData.get("pais") as string,
+        ubicacion: {lat:latitud, lng:longitud},
+        token,
+      });
+      form.reset();
+    } catch (error) {
+      console.error(error)
+    }
   };
   const handleReset = () => {
     // limpiar estados

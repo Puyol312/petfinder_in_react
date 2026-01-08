@@ -14,6 +14,10 @@ import { MisReportesPage } from "../pages/MisReportes";
 import { NuevoReportePage } from "../pages/NuevoReporte"
 import { EditarReportePage } from "../pages/EditarReporte";
 import { SignUpPage } from "../pages/SignUp";
+import { ConfigPage } from "../pages/config";
+import { ConfigPrincipalPage } from "../pages/config/principal";
+import { ConfigDataPage } from "../pages/config/data";
+import { ConfigPasswordPage } from "../pages/config/password";
 
 function AppRouter() { 
   return (
@@ -27,7 +31,12 @@ function AppRouter() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/misreportes" element={ <MisReportesPage/>}/>
           <Route path="/reportarnuevamascota" element={<NuevoReportePage />} />
-          <Route path="/editarreporte" element={<EditarReportePage/>} /> 
+          <Route path="/editarreporte" element={<EditarReportePage />} />
+          <Route path="/config" element={<ConfigPage />}>
+            <Route index element={<ConfigPrincipalPage/>}/>
+            <Route path="data" element={<ConfigDataPage/>}/>
+            <Route path="password" element={<ConfigPasswordPage/>}/>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
