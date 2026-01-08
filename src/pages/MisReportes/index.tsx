@@ -10,7 +10,8 @@ import { PetWanted } from "../../types/pet";
 import { SignInGuard } from "../../components/Guards/SignInGuard";
 import { RowReportsV2 } from "../../components/rowReports";
 import { Spinner } from "../../components/spiner";
-import { PlussButton } from "../../components/plussbutton";
+import { PlussButton } from "../../components/PlussButton";
+
 
 export function MisReportesPage() {
   const navigate = useNavigate();
