@@ -1,0 +1,37 @@
+.configPageContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  height: calc(100dvh - 112px);
+  padding: 24px 16px;
+}
+
+.configHeader {
+  text-align: center;
+}
+
+.configActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.configActions > button{
+  width: 335px;
+  height: 50px;
+}
+
+@media(min-width: 720px){
+  .configActions{
+    flex-direction: row;
+  }
+}
+
+.configFooter {
+  text-align: center;
+  font-size: 14px;
+  color: #6c757d;
+}
