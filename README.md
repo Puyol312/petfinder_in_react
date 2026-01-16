@@ -85,7 +85,7 @@ Las contribuciones son bienvenidas. Para contribuir:
 
 ## 📝 Licencia
 
-Este proyecto está bajo la Licencia MIT.
+Este proyecto está bajo la Licencia ISC.
 
 ## 👨‍💻 Autor
 
